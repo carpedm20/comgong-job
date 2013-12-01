@@ -1,4 +1,4 @@
- UNIST portal bot
+ Comgong Job
 =====
 
 ![alt tag](https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/1472985_512133618883942_749743322_n.jpg)
