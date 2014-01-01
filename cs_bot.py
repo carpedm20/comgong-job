@@ -112,12 +112,19 @@ display.start()
 
 job_url = {}
 kaist = {}
+career_kaist = {}
 snu = {}
 postech = {}
 
 kaist['list'] = 'http://cs.kaist.ac.kr/csbb/jboard.cs?tbl=recruit&page='
 kaist['base'] = 'http://cs.kaist.ac.kr/csbb/'
 # http://cs.kaist.ac.kr/csbb/view.cs?no=1216&tbl=recruit&page=1
+
+# POST http://career.kaist.ac.kr/sub0101/recrute/index
+# search=Y&division=&region=&occupational=IT%2C%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%2C%EC%A0%84%EC%82%B0&keyword=&x=44&y=11
+career_kaist['list'] = 'http://career.kaist.ac.kr/sub0101/recrute/index'
+career_kaist['base'] = 'http://career.kaist.ac.kr/'
+# http://career.kaist.ac.kr/sub0101/recrute/view/id/669
 
 snu['list'] = 'http://cse.snu.ac.kr/department-notices?c[0]=40&c[1]=2&keys=&page='
 snu['base'] = 'http://cse.snu.ac.kr/'
@@ -128,6 +135,7 @@ postech['base'] = 'http://phome.postech.ac.kr/user/'
 # http://phome.postech.ac.kr/user/boardList.action?command=view&page=1&boardId=11622&boardSeq=287839
 
 job_url['kaist'] = kaist
+job_url['career_kaist'] = career_kaist
 job_url['snu'] = snu
 job_url['postech'] = postech
 
@@ -139,18 +147,25 @@ while 1:
   print '.'
   #br_mech = mechanize.Browser()
   #br_mech.set_handle_robots(False)
-  #br_spy = spynner.Browser()
+  br_spy = spynner.Browser()
+  br_spy.set_cookies('career.kaist.ac.kr\tTRUE\t/\tFALSE\t9294967295\tci_session\t'+ci_session)
 
   for school in schools:
   #for school in ['postech']:
     print "[#] " + school.upper()
 
-    response = urllib2.urlopen(job_url[school]['list'])
+    if school == 'career_kaist':
+      response = urllib2.urlopen("http://career.kaist.ac.kr/sub0101/recrute/index","search=Y&division=&region=&occupational=IT%2C%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%2C%EC%A0%84%EC%82%B0&keyword=&x=44&y=11")
+    else:
+      response = urllib2.urlopen(job_url[school]['list'])
+
     r = response.read()
     soup = BeautifulSoup(r)
 
     if school == 'kaist':
       tds = soup.find_all('td','aL')
+    elif school == 'career_kaist':
+      tds = soup.find_all('td','title')
     elif school == 'snu':
       tds = soup.find_all('td','views-field views-field-title')
     elif school == 'postech':
@@ -164,6 +179,8 @@ while 1:
       if school == 'kaist':
         no = b[b.find('no=') + 3:]
         no = no[:no.find('&')]
+      elif school == 'career_kaist':
+        no = b[b.find('/id/')+4:]
       elif school == 'snu':
         no = b[b.find('node/') + 5:]
       elif school == 'postech':
@@ -180,10 +197,23 @@ while 1:
           break
 
       if new:
-        browser = webdriver.Firefox()
-        browser.get(b)
-        browser.save_screenshot(file_name)
+        if school == 'career_kaist':
+          browser = spynner.Browser()
+          browser.set_cookies('career.kaist.ac.kr\tTRUE\t/\tFALSE\t4294967295\tci_session\t'+ci_session)
+          browser.load(b)
+          browser.snapshot().save(file_name)
 
+        else:
+          browser = webdriver.Firefox()
+          browser.get(b)
+          browser.save_screenshot(file_name)
+
+        if school == 'career_kaist':
+          img = Image.open(file_name)
+          width, height = img.size
+          bbox = (0, 110, width, height-249)
+          working_slice = img.crop(bbox)
+          working_slice.save(file_name)
         if school == 'snu':
           img = Image.open(file_name)
           width, height = img.size
@@ -200,7 +230,11 @@ while 1:
 
         print" [*] Image : " +  file_name
 
-        html = browser.page_source
+        if school == 'career_kaist':
+          html = browser.html
+        else:
+          html = browser.page_source
+
         browser.close()
         soup = BeautifulSoup(html)
 
