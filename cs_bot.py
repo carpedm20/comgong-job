@@ -126,8 +126,8 @@ career_kaist['list'] = 'http://career.kaist.ac.kr/sub0101/recrute/index'
 career_kaist['base'] = 'http://career.kaist.ac.kr/'
 # http://career.kaist.ac.kr/sub0101/recrute/view/id/669
 
-snu['list'] = 'http://cse.snu.ac.kr/department-notices?c[0]=40&c[1]=2&keys=&page='
-snu['base'] = 'http://cse.snu.ac.kr/'
+#snu['list'] = 'http://cse.snu.ac.kr/department-notices?c[0]=40&c[1]=2&keys=&page='
+#snu['base'] = 'http://cse.snu.ac.kr/'
 # http://cse.snu.ac.kr/node/9606
 
 postech['list'] = 'http://phome.postech.ac.kr/user/indexSub.action?codyMenuSeq=18726&siteId=cse&menuUIType=sub&dum=dum&boardId=11622&page='
@@ -136,7 +136,7 @@ postech['base'] = 'http://phome.postech.ac.kr/user/'
 
 job_url['kaist'] = kaist
 job_url['career_kaist'] = career_kaist
-job_url['snu'] = snu
+#job_url['snu'] = snu
 job_url['postech'] = postech
 
 schools = job_url.keys()
@@ -198,10 +198,11 @@ while 1:
 
       if new:
         if school == 'career_kaist':
-          browser = spynner.Browser()
-          browser.set_cookies('career.kaist.ac.kr\tTRUE\t/\tFALSE\t4294967295\tci_session\t'+ci_session)
-          browser.load(b)
-          browser.snapshot().save(file_name)
+          br_spy= spynner.Browser()
+          br_spy.set_cookies('career.kaist.ac.kr\tTRUE\t/\tFALSE\t4294967295\tci_session\t'+ci_session)
+          br_spy.load(b)
+          br_spy.snapshot().save(file_name)
+          print "FILE SAVE SUCCESS : " + file_name
 
         else:
           browser = webdriver.Firefox()
@@ -209,11 +210,14 @@ while 1:
           browser.save_screenshot(file_name)
 
         if school == 'career_kaist':
+          print "FILE LOAD AGAIN : " + file_name
           img = Image.open(file_name)
           width, height = img.size
-          bbox = (0, 110, width, height-249)
+          #bbox = (0, 110, width, height-249)
+          bbox = (150, 160, width, height-189)
           working_slice = img.crop(bbox)
           working_slice.save(file_name)
+          #sys.exit(1)
         if school == 'snu':
           img = Image.open(file_name)
           width, height = img.size
@@ -231,11 +235,14 @@ while 1:
         print" [*] Image : " +  file_name
 
         if school == 'career_kaist':
-          html = browser.html
+          html = br_spy.html
         else:
           html = browser.page_source
 
-        browser.close()
+        try:
+          browser.close()
+        except:
+          z=123
         soup = BeautifulSoup(html)
 
         #title = soup.find('th').text
