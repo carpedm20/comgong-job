@@ -102,10 +102,6 @@ def width_slice(image_path, out_name, outdir, number):
     working_slice.save(os.path.join(outdir, out_name + "_" + str(count)+".png"))
     count +=1
 
-#atexit.register(exit_handler)
-#vdisplay = Xvfb()
-#vdisplay.start()
-
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(800, 600))
 display.start()
@@ -140,8 +136,24 @@ job_url['career_kaist'] = career_kaist
 job_url['postech'] = postech
 
 schools = job_url.keys()
+ci_session = ''
 
 from selenium import webdriver
+import requests
+
+def get_career_session():
+  global ci_session
+
+  data = {"type" : "company",
+          "userid" : cs_id,
+          "passwd" : cs_passwd }
+
+  r = requests.session()
+  career_login_url = "http://career.kaist.ac.kr/member/authority/choice_login"
+
+  r.post(career_login_url,data = data)
+
+  ci_session = r.cookies['ci_session']
 
 while 1:
   print '.'
@@ -149,6 +161,8 @@ while 1:
   #br_mech.set_handle_robots(False)
   br_spy = spynner.Browser()
   br_spy.set_cookies('career.kaist.ac.kr\tTRUE\t/\tFALSE\t9294967295\tci_session\t'+ci_session)
+
+  get_career_session()
 
   for school in schools:
   #for school in ['postech']:
