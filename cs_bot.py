@@ -14,6 +14,9 @@ from xvfbwrapper import Xvfb
 from email.MIMEImage import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.MIMEText import MIMEText
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from email.MIMEImage import MIMEImage
 from cs_config import *
 import socket
 import urllib2
@@ -24,37 +27,52 @@ import csv
 import simplejson as json
 from selenium import webdriver
 
+EMAIL_URL = "http://msn.unist.ac.kr/comgong/carpedm20.txt"
+
 def send_mail(text, filename=''):
   global email_username, email_password
 
   fromaddr = 'hexa.portal@gmail.com'
-  recipients = ['carpedm20@gmail.com']
+  r = urlopen(EMAIL_URL)
+  t = r.read()
+
+  recipients = t.split('\n')
   toaddrs  = ", ".join(recipients)
 
   username = email_username
   password = email_password
 
-  msg = MIMEMultipart()
-  msg['From'] = fromaddr
-  msg['To'] = toaddrs
-  msg['Subject'] = text
+  msgRoot = MIMEMultipart('related')
+  msgRoot['Subject'] = text
+  msgRoot['From'] = fromaddr
+  msgRoot['To'] = toaddrs
 
-  part = MIMEText('text', "plain")
-  part.set_payload(text)
-  msg.attach(part)
+  msgAlternative = MIMEMultipart('alternative')
+  msgRoot.attach(msgAlternative)
+
+  msgText = MIMEText("""<img src="cid:carpedm20"><br><div style="font-size:10px;color:#666666;line-height:100%;font-family:Helvetica">
+You are receiving this email because you signed up at <a href="http://comgong.us.to" target="_blank">http://comgong.us.to</a>.
+<br>
+<br>
+<a href="http://comgong.us.to" style="color:#17488a;text-decoration:underline;font-weight:normal" target="_blank">Unsubscribe</a>
+<br>
+<em>Copyright (C) 2014 <span class="il">Kim Tae Hoon (carpedm20)</span> All rights reserved.</em>
+<br>
+
+</div>""", 'html')
+  msgAlternative.attach(msgText)
 
   if filename is not '':
     img = MIMEImage(open(filename,"rb").read(), _subtype="png")
-    img.add_header('Content-Disposition', 'attachment; filename="'+filename+'"')
-    msg.attach(img)
+    img.add_header('Content-ID', '<carpedm20>')
+    msgRoot.attach(img)
 
   server = smtplib.SMTP('smtp.gmail.com:587')
   server.starttls()
   server.login(username,password)
-  server.sendmail(fromaddr, recipients, msg.as_string())
+  server.sendmail(fromaddr, recipients, msgRoot.as_string())
   server.quit()
   print " - mail sended"
-
 
 def long_slice(image_path, out_name, outdir, number):
   img = Image.open(image_path)
