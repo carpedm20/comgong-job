@@ -55,10 +55,6 @@ def send_mail(text, filename=''):
   server.quit()
   print " - mail sended"
 
-def exit_handler():
-  print "DEAD"
-  vdisplay.stop()
-  #send_mail("Bot is DEAD")
 
 def long_slice(image_path, out_name, outdir, number):
   img = Image.open(image_path)
@@ -154,6 +150,12 @@ def get_career_session():
   r.post(career_login_url,data = data)
 
   ci_session = r.cookies['ci_session']
+
+def exit_handler():
+  global display
+  display.stop()
+  
+atexit.register(exit_handler)
 
 while 1:
   print '.'
