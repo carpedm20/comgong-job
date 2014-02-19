@@ -32,7 +32,7 @@ EMAIL_URL = "http://msn.unist.ac.kr/comgong/carpedm20.txt"
 def send_mail(text, filename=''):
   global email_username, email_password
 
-  fromaddr = 'hexa.portal@gmail.com'
+  fromaddr = 'hexa.cs@gmail.com'
   r = urlopen(EMAIL_URL)
   t = r.read()
 
