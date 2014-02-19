@@ -1,0 +1,292 @@
+<!--
+ start : 2014-02-19 16:25 am
+                               _           ____   ___
+  ___ __ _ _ __ _ __   ___  __| |_ __ ___ |___ \ / _ \
+ / __/ _` | '__| '_ \ / _ \/ _` | '_ ` _ \  __) | | | |
+| (__ (_| | |  | |_) |  __/ (_| | | | | | |/ __/| |_| |
+ \___\__,_|_|  | .__/ \___|\__,_|_| |_| |_|_____|\___/
+               |_|
+
+ end  : 2014-??-??
+-->
+<html data-env='production' lang='ko' xml:lang='ko'>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>포탈봇</title>
+    <meta charset="utf-8">
+    <meta property="og:title" content="포탈봇" />
+
+    <meta name="description" content="Join Mailing lists of PortalBot">
+    <meta property="og:description" content="Join Mailing lists of PortalBot">
+
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/asset/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="fb:admins" content="" />
+
+    <meta name="google-site-verification" content="" />
+    <meta name="author" content="carpedm20">
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+div {
+  display: block;
+}
+
+body {
+  height: 100%;
+}
+
+div.overlay {
+  opacity: .8;
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#fullscreen_bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+#fullscreen_bg:before {
+  background-color: rgba(0,0,0,0.3);
+  background-image: none;
+}
+
+#fullscreen_bg:after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#fullscreen_image {
+  display:none;
+}
+
+#container {
+  height: 100%;
+  width: auto;
+}
+
+#content {
+  background: transparent;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+}
+
+.form_section {
+  position: relative;
+  top: 40%;
+  height: 310px;
+  margin-top: -155px;
+  text-align: center;
+}
+
+.form_header {
+  margin-bottom: 8px;
+}
+
+#logo {
+  margin: 0 auto;
+}
+
+#logo.size_large {
+  width: 260px;
+  height: 50%;
+}
+
+h1 {
+  color: #3f3f3f;
+  margin: 0 0 30px 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+a:-webkit-any-link {
+  color: -webkit-link;
+  text-decoration: underline;
+  cursor: auto;
+}
+
+.logo_anchor {
+  display: block;
+  overflow: hidden;
+  text-indent: -999em;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('./logo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#mailing_form {
+  display: block;
+  width: 260px;
+  margin: 0 auto;
+}
+
+.form-inputs {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+#content .form-inputs .form_row:first-child {
+  border-top: 0;
+}
+
+#content .form-inputs label {
+  display: none;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+input {
+  width: 100%;
+  padding: 11px 10px 11px 13px;
+  display: block;
+  margin: 0;
+  border: 0;
+  background: 0;
+  font: 16px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-buttons {
+  margin-top: 10px;
+}
+
+.chrome {
+  width: 100%;
+  margin: 0 0 8px;
+  float: left;
+  padding: 0 16px;
+  height: 45px;
+  line-height: 44px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-size: 16px;
+  border: 0;
+  display: inline-block;
+  text-decoration: none!important;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+.chrome.submit {
+  background-color: #529ecc;
+}
+
+.chrome.cancel{
+  background-color: #CBB3AC;
+}
+
+.footer {
+  color: white;
+  font: 13px 'Nanum Gothic', sans-serif
+}
+
+.custom-classname{
+  color:#ccc;
+  padding-top: 13px;
+}
+
+</style>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="jquery.email-autocomplete.min.js"></script>
+
+<script type="text/javascript">
+  var bg = ['https://31.media.tumblr.com/f81476bd4debd9ff0ff38ef14c450f7b/tumblr_n05l5w092f1sm1h24o1_1280.jpg', 'https://24.media.tumblr.com/739f70248a9ae0928575a26cf1df4fe3/tumblr_n13e338RGJ1rmnf9uo1_1280.jpg', 'https://31.media.tumblr.com/6ca32e1472ac96b3dab87543b156e771/tumblr_n166tsWKzg1qk3l1so1_1280.jpg', 'https://24.media.tumblr.com/9914da2a508fb5457ffb9af686dafc72/tumblr_n00qblXuZi1s10mp9o1_1280.gif', 'https://24.media.tumblr.com/14690359161f101f47e1ec09f6e62535/tumblr_n09xpoTP3P1qe8pboo1_1280.jpg', 'https://31.media.tumblr.com/f43ea75d0b5450c483e1424a2172806e/tumblr_mxgw0ltvaY1s71cheo2_1280.jpg', 'https://24.media.tumblr.com/56f0b6bae4e108aab1c91c742eec4b12/tumblr_n0x2l1JxO21townu1o1_1280.jpg', 'https://31.media.tumblr.com/56c5e71cb384692ead9a022950fae28c/tumblr_mzufoksigN1tofcqeo1_1280.jpg', 'https://24.media.tumblr.com/1053ce96ca224548b86d6e57bed33325/tumblr_n17e1v14Eq1r5ajivo1_1280.jpg', 'https://31.media.tumblr.com/70b7df17a4b7dbc1af43364d9e0e3e3c/tumblr_myrzo6D95P1spqmo9o1_1280.jpg', 'https://31.media.tumblr.com/9b8ff7598aac50e28c0aa9529eddc77d/tumblr_n17lv23JPY1su5081o1_1280.jpg', 'https://24.media.tumblr.com/36aba5cf6f6ccbade21b903aeffc55f4/tumblr_myhkjzc6rl1ryv7zjo1_1280.jpg', 'https://31.media.tumblr.com/10598e5cbdaf66a9d010e355712c8a6c/tumblr_msoclkhwGX1rpf2vio1_1280.jpg', 'https://24.media.tumblr.com/bc6ea641416ac6dbdd83e3d616e16f98/tumblr_n15b10QuVq1sqrclso1_1280.jpg', 'https://24.media.tumblr.com/8722b2118de4d6debdfa5b5f4f3a98c3/tumblr_n156z4KVUD1qzx8cgo1_1280.jpg', 'https://31.media.tumblr.com/fe28646e5b2caeedfed7a99dcb5ac40b/tumblr_n0sf0oSNUQ1r9w6r5o1_r1_1280.jpg', 'https://31.media.tumblr.com/d09c3faca14c7664cc3d96e6f3a87acb/tumblr_mq3oasfvTJ1s3ywvqo1_1280.jpg', 'https://24.media.tumblr.com/8901428dca51d248ebe99eaab946316e/tumblr_n0woe395Cl1rpixm5o1_r1_1280.jpg', 'https://31.media.tumblr.com/8c1552c78b3d284f104007c966fa2611/tumblr_n0qdj8ta8E1rdl2s4o1_1280.jpg', 'https://31.media.tumblr.com/d0b397a330ad2837c8f750075452b689/tumblr_n0hpjpg5x31rws901o1_1280.jpg', 'https://24.media.tumblr.com/8bdbd3c4f2b431fcbd4cb0f15d7e9d65/tumblr_n15fx7zbhu1rsn1oro1_1280.jpg', 'https://24.media.tumblr.com/9f787b6ac0b9f012afff601bbe4a9c0d/tumblr_n0q40d3IjE1qkcfsro1_1280.jpg', 'https://31.media.tumblr.com/f7f95f340287a815bef95f97a42ea2fe/tumblr_n10fzkGmHB1sl6l1no1_1280.gif', 'https://31.media.tumblr.com/6dc9431d2416278c78f7ef0f90a4b514/tumblr_n0eeypDs2Q1trmn86o2_1280.png', 'https://31.media.tumblr.com/8d493c3b1abd4bfa436d377d8cd78f7a/tumblr_n145nagTgZ1tst46wo1_1280.jpg', 'https://24.media.tumblr.com/37e5e457922174f50b2c9b746c875f09/tumblr_n0m144A2up1s49j13o1_1280.jpg','https://31.media.tumblr.com/f7f95f340287a815bef95f97a42ea2fe/tumblr_n10fzkGmHB1sl6l1no1_1280.gif'];
+
+  $(document).ready(function() {
+    var rand = bg[Math.floor(Math.random() * bg.length)];
+    $('#fullscreen_bg').css('background', 'url(' + rand +  ') no-repeat center center fixed');
+    $('#fullscreen_bg').css("background-size","cover");
+    $('#fullscreen_image').attr("src",rand);
+
+    $("#email").emailautocomplete({
+      suggClass: "custom-classname", //default: "eac-sugg". your custom classname (optional)
+      domains: ["yahoo.com", "unist.ac.kr", "nate.com", "naver.com", "hotmail.com", "gmail.com", "me.com", "aol.com", "mac.com", "live.com", "comcast.net", "msn.com", "facebook.com", "verizon.net", "sbcglobal.net", "att.net", "gmx.com", "mail.com", "outlook.com", "icloud.com"]
+    });
+  });
+
+</script>
+  </head>
+
+<body>
+  <div id="fullscreen_bg">
+    <div class="overlay"></div>
+    <img id="fullscreen_image"/>
+  </div>
+  <div id="container">
+    <div id="content">
+      <div class="form_section">
+        <div class="form_header">
+          <h1 class="logo forgot_password_logo size_large" id="logo">
+            <a class="logo_anchor" href="/dashboard">포탈봇</a>
+          </h1>
+        </div>
+        <form id="mailing_form" action="/forgot_password" method="post">
+          <div class="form-inputs">
+            <div class="form_row">
+              <label for="email">이메일</label>
+              <input type="email" name="email" id="email" class="text_field" placeholder="이메일" value="">
+            </div>
+          </div>
+          <div class="form-buttons full-width clearfix">
+            <a class="chrome submit" href="https://www.tumblr.com/login">메일 받기</a>
+            <a class="chrome cancel" href="https://www.tumblr.com/login">메일 받지 않기</a>
+          </div>
+          <div class="footer">
+            <p>제작자 : 김태훈 (carpedm20)</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
