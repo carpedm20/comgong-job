@@ -339,8 +339,7 @@ while 1:
         content = "[ " + school.upper() + " ]" + "\r\n\r\n" + title + "\r\n\r\n링크 : " + b
         print "   [$] content : " + content
 
-        tail = '\r\n\r\n제작자 : 김태훈(carpedm20)'
-        tail = ''
+        tail = '\r\n\r\n제작자 : 김태훈(carpedm20)\r\n\r\n채용 정보 메일로 받기 : http://comgong.us.to/'
 
         if sliced is True:
           long_slice(file_name, file_name[:-4], os.getcwd(), slice_num)
