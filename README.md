@@ -14,6 +14,6 @@ This is a program that uploads newest internship and recruit announcements to fa
 
 Facebook : https://www.facebook.com/comgong.job
 
-Contact : carpedm20@gmail.com
+Mailing list : http://comgong.us.to
 
 Copyright (c) 2013 Kim Tae Hoon
