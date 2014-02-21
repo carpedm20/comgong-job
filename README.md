@@ -1,5 +1,25 @@
  Comgong Job
-=====
+=============
+
+## What is Comgong Job ##
+
+This is a python code for Comgong Job bot.
+
+This is a program that uploads newest internship and recruit announcements to facebook automatically.
+
+
+## Links ##
+
+- Facebook : https://www.facebook.com/comgong.job
+- Mailing list : http://comgong.us.to
+
+
+## Copyright ##
+
+Copyright (c) 2013 Kim Tae Hoon
+
+
+## Screenshots ##
 
 ![alt tag](http://2.bp.blogspot.com/-EYdrLQrljWE/Uqe8z9r_FuI/AAAAAAAACB4/k1WJsOkkbXc/s1600/com.jpg)
 
@@ -7,13 +27,8 @@
 
 ![alt_tag](http://1.bp.blogspot.com/-UhK31AP7F9A/UwTG46VF8EI/AAAAAAAACRc/USQXCy9qT0A/s1600/cs_job_email.png)
 
-This is a python code for Comgong Job bot.
-
-This is a program that uploads newest internship and recruit announcements to facebook automatically.
 
 
-Facebook : https://www.facebook.com/comgong.job
 
-Mailing list : http://comgong.us.to
 
-Copyright (c) 2013 Kim Tae Hoon
+
