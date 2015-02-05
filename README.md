@@ -19,5 +19,5 @@ The MIT License (MIT)
 
 ## Screenshots ##
 
-![alt_tag](https://raw.githubusercontent.com/carpedm20/comgong-job/master/contents/comgong.png)
+![alt_tag](https://raw.githubusercontent.com/carpedm20/comgong-job/master/contents/comgong.PNG)
 
