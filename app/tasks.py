@@ -4,9 +4,20 @@ from bs4 import BeautifulSoup
 BASE = "http://rocketpun.ch/"
 get_soup = lambda url: BeautifulSoup(requests.get(url).text)
 
-def main_task():
+def main_task(Recruit, db_session):
     for recruit in get_list():
-        pass
+        instance = Recruit.query.filter_by(id=recruit[3]).first()
+        if instance:
+            print "[@] %s already exists" % instance
+            pass
+        else:
+            recruit = Recruit(recruit[0],
+                              recruit[1],
+                              recruit[2],
+                              recruit[3])
+
+            db_session.add(recruit)
+            db_session.commit()
 
 def get_list():
     url = BASE + "recruit/list/"
@@ -23,4 +34,4 @@ def get_list():
         yield [job.text,
                company.text,
                content.text,
-               a_link['href'].split('/')[-2]]
+               int(a_link['href'].split('/')[-2])]
