@@ -1,9 +1,9 @@
 Comgong Job
 ===========
 
-컴공아 일하자 (a.k.a. Comgong Job) is a robot that uploads newest internship and recruit announcements to facebook automatically.
+컴공아 일하자 (a.k.a. Comgong Job) is a robot that uploads newest internship and recruit announcements to Facebook automatically.
 
-[link](https://www.facebook.com/comgong.job)
+Facebook page : [link](https://www.facebook.com/comgong.job)
 
 
 Copyright
