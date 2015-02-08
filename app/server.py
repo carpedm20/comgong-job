@@ -43,9 +43,9 @@ class Company(Base):
 class Recruit(Base):
     __tablename__ = 'recruit'
     id = Column(Integer, primary_key=True)
-    company = Column(String(50), primary_key=True)
-    job = Column(String(50), primary_key=True)
-    content = Column(Text, unique=True)
+    company = Column(String(50))
+    job = Column(String(50))
+    content = Column(Text)
     published = Column(Boolean, default=False)
 
     def __init__(self, job, company, content, id):
@@ -59,19 +59,49 @@ class Recruit(Base):
         return "http://rocketpun.ch/recruit/" + str(self.id)
 
     def __repr__(self):
-        msg = '<Recruit %s (%s): %s>' % (self.company, self.job, self.url)
+        msg = '<Recruit %s<%s> (%s): %s>' % (self.company, self.id, self.job, self.url)
         return msg.encode('utf8')
 
 Base.metadata.create_all(bind=engine)
 
 import redis
-r_server = redis.Redis('localhost')
-token = r_server.get('cs-long-token')
+import json
+import mechanize
+import urllib2
 
-graph = facebook.GraphAPI(access_token=token)
+def get_acces_token():
+    r_server = redis.Redis('localhost')
+    email = r_server.get('fb_email')
+    password = r_server.get('fb_pass')
+
+    browser = mechanize.Browser()
+    browser.set_handle_robots(False)
+    browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7')]
+    cookies = mechanize.CookieJar()
+
+    browser.open('https://www.facebook.com/dialog/oauth?scope=manage_pages,publish_stream&redirect_uri=http://carpedm20.blogspot.kr&response_type=token&client_id=641444019231608')
+
+    browser.select_form(nr=0)
+    browser.form['email'] = email
+    browser.form['pass'] = password
+    response = browser.submit()
+
+    url = response.geturl()
+    account_app_access = url[url.find("access_token=")+len("access_token="):url.find('&expi')]
+
+    page_id = '512098305554140'
+    page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + account_app_access
+    j = urllib2.urlopen(page_app_access_url)
+    j = json.loads(j.read())
+
+    for d in j['data']:
+        if d['id'] == '512098305554140':
+            app_access = d['access_token']
+            return app_access
 
 if __name__ == '__main__':
     while True:
+
         main_task(Recruit, db_session)
 
         recruits = Recruit.query.filter_by(published=False).all()
@@ -80,6 +110,8 @@ if __name__ == '__main__':
             for r in recruits:
                 msg = "[" + r.company + "] " + r.job + "\r\n\r\n" + r.content;
 
+                token = get_acces_token()
+                graph = facebook.GraphAPI(access_token=token)
                 graph.put_object("me", "feed",
                     message = msg.encode('utf-8'),
                     link = r.url,
@@ -88,10 +120,10 @@ if __name__ == '__main__':
                 r.published = True
                 db_session.commit()
 
-                print " [*] Publish %s" % r
-                time.sleep(60)
+                print " [*] Publish %s <%s>" % (r, token.encode('utf-8'))
+                time.sleep(300)
                 pass
         else:
             print " [!] Nothing to publish"
 
-        time.sleep(60)
+        time.sleep(600)

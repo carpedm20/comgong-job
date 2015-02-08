@@ -30,8 +30,14 @@ def get_list():
 
     zipped = zip(job_elems, company_elems, content_elems, href_elems)
 
+    zipped.reverse()
+
     for (job, company, content, a_link) in zipped:
+        job_soup = get_soup(BASE + a_link['href'])
+        quote = job_soup.select("blockquote div")[0]
+        job_content = quote.decode_contents(formatter="html").replace("<br/>","\r\n")
+
         yield [job.text,
                company.text,
-               content.text,
+               job_content,
                int(a_link['href'].split('/')[-2])]
