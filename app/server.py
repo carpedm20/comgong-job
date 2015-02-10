@@ -79,7 +79,7 @@ def get_acces_token():
     browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7')]
     cookies = mechanize.CookieJar()
 
-    browser.open('https://www.facebook.com/dialog/oauth?scope=manage_pages,publish_stream&redirect_uri=http://carpedm20.blogspot.kr&response_type=token&client_id=641444019231608')
+    browser.open('https://www.facebook.com/dialog/oauth?scope=manage_pages,publish_stream&redirect_uri=https://carpedm20.github.io/&response_type=token&client_id=641444019231608')
 
     browser.select_form(nr=0)
     browser.form['email'] = email
