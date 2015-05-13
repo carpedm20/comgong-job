@@ -79,7 +79,7 @@ def get_acces_token():
     browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7')]
     cookies = mechanize.CookieJar()
 
-    browser.open('https://www.facebook.com/dialog/oauth?scope=manage_pages,publish_stream&redirect_uri=https://carpedm20.github.io/&response_type=token&client_id=641444019231608')
+    browser.open('https://www.facebook.com/dialog/oauth?scope=manage_pages,publish_actions&redirect_uri=https://carpedm20.github.io/&response_type=token&client_id=641444019231608')
 
     browser.select_form(nr=0)
     browser.form['email'] = email
@@ -91,6 +91,7 @@ def get_acces_token():
 
     page_id = '512098305554140'
     page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + account_app_access
+    print page_app_access_url
     j = urllib2.urlopen(page_app_access_url)
     j = json.loads(j.read())
 
@@ -121,9 +122,9 @@ if __name__ == '__main__':
                 db_session.commit()
 
                 print " [*] Publish %s <%s>" % (r, token.encode('utf-8'))
-                time.sleep(300)
+                time.sleep(3600)
                 pass
         else:
             print " [!] Nothing to publish"
 
-        time.sleep(600)
+        time.sleep(3600)
