@@ -90,9 +90,15 @@ def get_acces_token():
     account_app_access = url[url.find("access_token=")+len("access_token="):url.find('&expi')]
 
     page_id = '512098305554140'
-    page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + account_app_access
-    print page_app_access_url
-    j = urllib2.urlopen(page_app_access_url)
+    try:
+        page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + account_app_access
+        print page_app_access_url
+        j = urllib2.urlopen(page_app_access_url)
+    except:
+        page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + "CAAJHY9Lo23gBAInuF2wH9yo3fCFgFmqkRMMSzfpI7XuJ3k7zle4ZBdAZCw83ZCZCVzZB8k8THz3YJDQzmeBnBDLso5MKZA7bKAfZCZBlh8cJ8eJjPm3bf80pV5M2upU2szfbEkDWOlMLqv3qxLcYlDaeud9ilFVU4kpw623CpZBlK89AR078fwoHOa4SSlVThaVQGdnrvzEk6QV5mcQaqZBalhvbSxc0uzw90ZD"
+        print page_app_access_url
+        j = urllib2.urlopen(page_app_access_url)
+
     j = json.loads(j.read())
 
     for d in j['data']:
