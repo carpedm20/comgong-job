@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE = "http://rocketpun.ch/"
-get_soup = lambda url: BeautifulSoup(requests.get(url).text)
+get_soup = lambda url: BeautifulSoup(requests.get(url, verify=False).text)
 
 def main_task(Recruit, db_session):
     for recruit in get_list():

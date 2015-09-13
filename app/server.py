@@ -90,12 +90,15 @@ def get_acces_token():
     account_app_access = url[url.find("access_token=")+len("access_token="):url.find('&expi')]
 
     page_id = '512098305554140'
+
+    return "CAAJHY9Lo23gBAEDOhonuNIOIvP1WhQlNODAaRy10UIkdhCkCvnZAE4BDqduqh8XiWXZA10H3GLlW2RqZC1d3f1kLCi4RuQX5mrnJKRP7iHx4sqaGCUQJid3Cv1eV0l1wbjGTne2ZC1A8AiSGm5AzBB7ZCWKcl77ZBV5iBb0O2xrn8wHlFuQgKkqskF0kTIwfDZBpNFO7lZAuKOzZCVTMOKk7n"
+
     try:
         page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + account_app_access
         print page_app_access_url
         j = urllib2.urlopen(page_app_access_url)
     except:
-        page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + "CAAJHY9Lo23gBAInuF2wH9yo3fCFgFmqkRMMSzfpI7XuJ3k7zle4ZBdAZCw83ZCZCVzZB8k8THz3YJDQzmeBnBDLso5MKZA7bKAfZCZBlh8cJ8eJjPm3bf80pV5M2upU2szfbEkDWOlMLqv3qxLcYlDaeud9ilFVU4kpw623CpZBlK89AR078fwoHOa4SSlVThaVQGdnrvzEk6QV5mcQaqZBalhvbSxc0uzw90ZD"
+        page_app_access_url = "https://graph.facebook.com/me/accounts?access_token=" + "CAAJHY9Lo23gBAEDOhonuNIOIvP1WhQlNODAaRy10UIkdhCkCvnZAE4BDqduqh8XiWXZA10H3GLlW2RqZC1d3f1kLCi4RuQX5mrnJKRP7iHx4sqaGCUQJid3Cv1eV0l1wbjGTne2ZC1A8AiSGm5AzBB7ZCWKcl77ZBV5iBb0O2xrn8wHlFuQgKkqskF0kTIwfDZBpNFO7lZAuKOzZCVTMOKk7n"
         print page_app_access_url
         j = urllib2.urlopen(page_app_access_url)
 
